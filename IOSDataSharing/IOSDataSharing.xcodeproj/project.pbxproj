@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1CDB19801EDD321A00A1560B /* Swifter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CDB197F1EDD321A00A1560B /* Swifter.framework */; };
+		1CDB19811EDD321A00A1560B /* Swifter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CDB197F1EDD321A00A1560B /* Swifter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1CF75C561EBC6DDC00E9D736 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF75C551EBC6DDC00E9D736 /* AppDelegate.swift */; };
 		1CF75C581EBC6DDC00E9D736 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF75C571EBC6DDC00E9D736 /* ViewController.swift */; };
 		1CF75C5B1EBC6DDC00E9D736 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CF75C591EBC6DDC00E9D736 /* Main.storyboard */; };
@@ -19,7 +21,22 @@
 		1CF75C781EBC71EA00E9D736 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CF75C761EBC71EA00E9D736 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1CDB197E1EDD308700A1560B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1CDB19811EDD321A00A1560B /* Swifter.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		1CDB197F1EDD321A00A1560B /* Swifter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swifter.framework; path = Carthage/Build/iOS/Swifter.framework; sourceTree = "<group>"; };
 		1CF75C521EBC6DDC00E9D736 /* HSReplayHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HSReplayHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CF75C551EBC6DDC00E9D736 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1CF75C571EBC6DDC00E9D736 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CDB19801EDD321A00A1560B /* Swifter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +75,7 @@
 		1CF75C491EBC6DDC00E9D736 = {
 			isa = PBXGroup;
 			children = (
+				1CDB197F1EDD321A00A1560B /* Swifter.framework */,
 				1CF75C541EBC6DDC00E9D736 /* HSReplayHost */,
 				1CF75C6C1EBC71EA00E9D736 /* HSReplayClient */,
 				1CF75C531EBC6DDC00E9D736 /* Products */,
@@ -108,6 +127,7 @@
 				1CF75C4E1EBC6DDC00E9D736 /* Sources */,
 				1CF75C4F1EBC6DDC00E9D736 /* Frameworks */,
 				1CF75C501EBC6DDC00E9D736 /* Resources */,
+				1CDB197E1EDD308700A1560B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -153,6 +173,11 @@
 					1CF75C6A1EBC71EA00E9D736 = {
 						CreatedOnToolsVersion = 8.3.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -356,6 +381,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 4CMHE2BMG4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/HSReplayHost/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -372,6 +401,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 4CMHE2BMG4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/HSReplayHost/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -425,6 +458,7 @@
 				1CF75C661EBC6DDC00E9D736 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1CF75C7A1EBC71EA00E9D736 /* Build configuration list for PBXNativeTarget "HSReplayClient" */ = {
 			isa = XCConfigurationList;
@@ -433,6 +467,7 @@
 				1CF75C7C1EBC71EA00E9D736 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
