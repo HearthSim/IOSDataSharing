@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	// Support for background fetch
 	func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 		NSLog("Fetching data...")
-		let url = URL(string: "http://localhost:8080/hello")
+		let url = URL(string: "http://localhost:8080/powerlog/")
 		
 		dataTask = self.defaultSession.dataTask(with: url!, completionHandler: { (data, response, error) in
 			if let data = data {
