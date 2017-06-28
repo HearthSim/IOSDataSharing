@@ -6,10 +6,14 @@ using System.Threading;
 
 public class SimpleServerScript : MonoBehaviour {
 
-	HttpListener listener = null;
+	private HttpListener m_listener = null;
+	private Thread m_listenerThread;
 
-	public int serverPort = 9999;
-	bool Running = false;
+	// define server port
+	public const int serverPort = 9999;
+
+	// indicates whether the server is running
+	private bool m_isRunning = false;
 
 	// Use this for initialization
 	void Awake () {
@@ -17,50 +21,62 @@ public class SimpleServerScript : MonoBehaviour {
 
 	void Start ()
 	{
-		//Debug.Log("Start called.");
 		Setup();
 	}
 
+	/* Starts the server */
 	void Setup() {
-		listener = new HttpListener();
+		m_listener = new HttpListener();
 
-		listener.Prefixes.Add("http://localhost:8080/powerlog/");
+		m_listener.Prefixes.Add("http://localhost:" + serverPort + "/powerlog/");
 
-		listener.Start();
-		Thread listenerThread = new Thread (new ThreadStart(this.Listen));
-		listenerThread.Start ();
+		// Listening should run on a separate thread to avoid blocking the unity update thread
+		m_listener.Start();
+		m_listenerThread = new Thread(new ThreadStart(this.Listen));
+		m_listenerThread.Start();
 	}
 
-	// Update is called once per frame
+	/* Update is called once per frame */
 	void Update () {
+		// Do nothing, listener is on its own thread
 	}
 
 	void Listen() {
-		this.Running = true;
-		while (this.Running) {
+		this.m_isRunning = true;
+		while (this.m_isRunning) {
 			// Note: The GetContext method blocks while waiting for a request. 
-			HttpListenerContext context = listener.GetContext();
+			HttpListenerContext context = m_listener.GetContext();
 
+			// On a connection a respone thread is spawned
 			Thread responseThread = new Thread(() => Respond(context));
 			responseThread.Start ();
 		}
 	}
 
+	/* Respond to an http request */
 	void Respond(HttpListenerContext context) {
+		// The request object has data about the exact request URI data
 		HttpListenerRequest request = context.Request;
+		
 		// Obtain a response object.
 		HttpListenerResponse response = context.Response;
+		
 		// Construct a response.
 		string responseString = "<HTML><BODY> Power log content comes here </BODY></HTML>";
 
 		byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+		
 		// Get a response stream and write the response to it.
 		response.ContentLength64 = buffer.Length;
 		System.IO.Stream output = response.OutputStream;
 		output.Write(buffer,0,buffer.Length);
-		// You must close the output stream.
+		
+		// The output stream must be closed
 		output.Close();
 	}
 
-
+	/* Stops the server */
+	void Stop() {
+		this.m_isRunning = false;
+	}
 }
