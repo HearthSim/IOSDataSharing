@@ -57,6 +57,11 @@ public class SimpleServerScript : MonoBehaviour {
 	void Respond(HttpListenerContext context) {
 		// The request object has data about the exact request URI data
 		HttpListenerRequest request = context.Request;
+
+		// Only request from localhost are handled
+		if (!request.IsLocal) {
+			return;
+		}
 		
 		// Obtain a response object.
 		HttpListenerResponse response = context.Response;
