@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  HSReplayClient
-//
-//  Created by Istvan Fehervari on 05/05/2017.
-//  Copyright © 2017 Istvan Fehervari. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
